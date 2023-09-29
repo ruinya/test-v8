@@ -19,5 +19,4 @@ export default function showInfo(content) {
   const maxRate = _.maxBy(data.map((shop) => shop[4]));
 
   console.log(`Ratings: Min: ${minRate} Max: ${maxRate}`);
-
 }

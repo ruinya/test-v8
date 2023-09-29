@@ -27,4 +27,29 @@ export default function showInfo(content) {
   const maxLiveYears = yearsLive[0];
 
   console.log(`Oldest barbershop: ${maxLiveYears}`);
+
+  // step 5
+
+  const oldHairdress = data.filter((hairdress) => Number(hairdress[3]) > 5);
+  // console.log(oldHairdress);
+
+  // Вычисляем средние цены для каждой старой парикмахерской
+  const averagePrices = oldHairdress.map((hairdresser) => {
+    const priceRange = hairdresser[1].split('-').map((price) => Number(price.trim()));
+    const [minPrice, maxPrice] = priceRange;
+    return (minPrice + maxPrice) / 2;
+  });
+
+  // Находим наименьшую среднюю цену и соответствующую парикмахерскую
+  const minAveragePrice = _.min(averagePrices);
+  const bestBarbershop = oldHairdress.find((hairdresser) => {
+    const priceRange = hairdresser[1].split('-').map((price) => Number(price.trim()));
+    const [minPrice, maxPrice] = priceRange;
+    const averagePrice = (minPrice + maxPrice) / 2;
+    return averagePrice === minAveragePrice;
+  });
+
+  const bestBarberName = bestBarbershop[0];
+
+  console.log(`Best barbershop: ${bestBarberName}`);
 }
